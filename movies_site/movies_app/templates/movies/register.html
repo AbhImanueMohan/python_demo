@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mx-auto max-w-md mt-20 bg-gray-900 p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6 text-center">Register</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label for="id_username" class="block font-semibold mb-1">Username</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_first_name" class="block font-semibold mb-1">First Name</label>
+            {{ form.first_name }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_last_name" class="block font-semibold mb-1">Last Name</label>
+            {{ form.last_name }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_email" class="block font-semibold mb-1">Email</label>
+            {{ form.email }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_password1" class="block font-semibold mb-1">Password</label>
+            {{ form.password1 }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_password2" class="block font-semibold mb-1">Confirm Password</label>
+            {{ form.password2 }}
+        </div>
+
+        <button type="submit" class="btn btn-custom w-full mt-4">Register</button>
+    </form>
+
+    <p class="mt-4 text-center">Already have an account? <a href="{% url 'login' %}" class="text-blue-500">Login</a></p>
+</div>
+
+{% endblock %}

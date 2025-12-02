@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-6">Admin Panel</h1>
+
+    <!-- Admin Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-gray-800 p-4 rounded-lg shadow hover:scale-105 transition-transform">
+            <h2 class="text-xl font-semibold mb-2">Manage Categories</h2>
+            <a href="{% url 'add_category' %}" class="btn btn-custom">Add New Category</a>
+        </div>
+
+        <div class="bg-gray-800 p-4 rounded-lg shadow hover:scale-105 transition-transform">
+            <h2 class="text-xl font-semibold mb-2">Manage Movies</h2>
+            <a href="{% url 'movie_list' %}" class="btn btn-custom">View/Edit Movies</a>
+        </div>
+
+        <div class="bg-gray-800 p-4 rounded-lg shadow hover:scale-105 transition-transform">
+            <h2 class="text-xl font-semibold mb-2">Manage Users</h2>
+            <a href="{% url 'user_list' %}" class="btn btn-custom">View/Delete Users</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

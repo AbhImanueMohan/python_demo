@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+    <!-- My Movies -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">My Movies</h2>
+        <div class="movie-grid">
+            {% for movie in my_movies %}
+            <div class="card">
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                <div class="card-content">
+                    <h3 class="text-xl font-bold mb-2">{{ movie.title }}</h3>
+                    <a href="{{ movie.get_absolute_url }}" class="btn btn-custom w-full">View Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>You haven't added any movies yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Favorites -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Favorites</h2>
+        <div class="movie-grid">
+            {% for movie in favorites %}
+            <div class="card">
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                <div class="card-content">
+                    <h3 class="text-xl font-bold mb-2">{{ movie.title }}</h3>
+                    <a href="{{ movie.get_absolute_url }}" class="btn btn-custom w-full">View Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>You haven't favorited any movies yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Recent Comments -->
+    <section>
+        <h2 class="text-2xl font-semibold mb-4">Recent Comments</h2>
+        <div class="space-y-4">
+            {% for comment in recent_comments %}
+            <div class="bg-gray-900 p-4 rounded-lg shadow">
+                <p class="font-semibold">On <a href="{{ comment.movie.get_absolute_url }}" class="text-blue-500">{{ comment.movie.title }}</a></p>
+                <p>{{ comment.content }}</p>
+                <span class="text-gray-400 text-sm">{{ comment.created_at }}</span>
+            </div>
+            {% empty %}
+            <p>No recent comments.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+{% endblock %}

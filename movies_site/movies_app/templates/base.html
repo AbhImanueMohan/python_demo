@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 flex justify-between items-center">
+        <a href="{% url 'movie_list' %}" class="font-bold text-2xl hover:text-blue-400">MovieHub</a>
+        <div class="space-x-4">
+            {% if user.is_authenticated %}
+                <span class="mr-2">Hello, {{ user.username }}</span>
+                <a href="{% url 'dashboard' %}" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">Dashboard</a>
+                <form action="{% url 'logout' %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">
+                        Logout
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded">Login</a>
+                <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 p-4 rounded {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 p-4 text-center mt-4">
+        <p>&copy; {{ year|default:"2025" }} MovieHub. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 flex justify-between items-center">
+        <a href="{% url 'movie_list' %}" class="font-bold text-2xl hover:text-blue-400">MovieHub</a>
+        <div class="space-x-4">
+            {% if user.is_authenticated %}
+                <span class="mr-2">Hello, {{ user.username }}</span>
+                <a href="{% url 'dashboard' %}" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">Dashboard</a>
+                <form action="{% url 'logout' %}" method="POST" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">
+                        Logout
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded">Login</a>
+                <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 p-4 rounded {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 p-4 text-center mt-4">
+        <p>&copy; {{ year|default:"2025" }} MovieHub. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

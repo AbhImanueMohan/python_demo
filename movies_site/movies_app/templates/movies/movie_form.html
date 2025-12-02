@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mx-auto max-w-2xl mt-12 bg-gray-900 p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6">
+        {% if movie %}Edit Movie{% else %}Add New Movie{% endif %}
+    </h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Title -->
+        <div class="mb-4">
+            <label for="id_title" class="block font-semibold mb-1">Title</label>
+            {{ form.title }}
+        </div>
+
+        <!-- Poster -->
+        <div class="mb-4">
+            <label for="id_poster" class="block font-semibold mb-1">Poster</label>
+            {{ form.poster }}
+            {% if movie and movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="mt-2 w-32 h-48 object-cover rounded">
+            {% endif %}
+        </div>
+
+        <!-- Description -->
+        <div class="mb-4">
+            <label for="id_description" class="block font-semibold mb-1">Description</label>
+            {{ form.description }}
+        </div>
+
+        <!-- Release Date -->
+        <div class="mb-4">
+            <label for="id_release_date" class="block font-semibold mb-1">Release Date</label>
+            {{ form.release_date }}
+        </div>
+
+        <!-- Actors -->
+        <div class="mb-4">
+            <label for="id_actors" class="block font-semibold mb-1">Actors</label>
+            {{ form.actors }}
+        </div>
+
+        <!-- Rating -->
+        <div class="mb-4">
+            <label for="id_rating" class="block font-semibold mb-1">Rating</label>
+            {{ form.rating }}
+        </div>
+
+        <!-- Category -->
+        <div class="mb-4">
+            <label for="id_category" class="block font-semibold mb-1">Category</label>
+            {{ form.category }}
+        </div>
+
+        <!-- Trailer URL -->
+        <div class="mb-4">
+            <label for="id_trailer_url" class="block font-semibold mb-1">YouTube Trailer URL</label>
+            {{ form.trailer_url }}
+        </div>
+
+        <button type="submit" class="btn btn-custom w-full mt-4">
+            {% if movie %}Update Movie{% else %}Add Movie{% endif %}
+        </button>
+    </form>
+</div>
+
+{% endblock %}

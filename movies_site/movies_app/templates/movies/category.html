@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mx-auto mt-8">
+    <h1 class="text-3xl font-bold mb-6">Category: {{ category.name }}</h1>
+
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <div class="card">
+            <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+            <div class="card-content">
+                <h2 class="text-xl font-bold mb-2">{{ movie.title }}</h2>
+                <p class="mb-2">Rating: {{ movie.rating }}/10</p>
+                <a href="{{ movie.get_absolute_url }}" class="btn btn-custom w-full">View Details</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No movies found in this category.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6">
+        {% if is_paginated %}
+            <div class="flex justify-center gap-2">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-custom">Previous</a>
+                {% endif %}
+                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-custom">Next</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

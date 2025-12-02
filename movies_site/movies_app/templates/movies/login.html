@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto max-w-md mt-20 bg-gray-900 p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6 text-center">Login</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label for="id_username" class="block font-semibold mb-1">Username</label>
+            {{ form.username|add_class:"w-full p-2 rounded bg-gray-800 border border-gray-700 text-white" }}
+        </div>
+
+        <div class="mb-4">
+            <label for="id_password" class="block font-semibold mb-1">Password</label>
+            {{ form.password|add_class:"w-full p-2 rounded bg-gray-800 border border-gray-700 text-white" }}
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded mt-2">
+            Login
+        </button>
+    </form>
+
+    <p class="mt-4 text-center text-gray-300">
+        Don't have an account? <a href="{% url 'register' %}" class="text-blue-500 underline">Register</a>
+    </p>
+</div>
+{% endblock %}
